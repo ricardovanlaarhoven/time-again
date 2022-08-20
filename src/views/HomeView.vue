@@ -1,11 +1,5 @@
 <script setup lang="ts">
-enum Colors {
-  green = 0,
-  orange = 1,
-  blue = 2,
-  red = 3,
-  yellow = 4,
-}
+import { Colors } from '@/enums/Colors';
 
 const gameGrid : {color: Colors, star: boolean}[][] = [
   [
