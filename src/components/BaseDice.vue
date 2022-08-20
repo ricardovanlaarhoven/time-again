@@ -22,7 +22,7 @@ const cssBackgroundColor = computed((): string => {
     return '#FFFFFF';
   }
 
-  return '#000000'
+  return '#0a1515'
 })
 
 const cssForeGroundColor = computed((): string => {
@@ -38,19 +38,32 @@ const cssForeGroundColor = computed((): string => {
 <template>
   <div class="dice" :class="`dice-value--${props.value}} dice-type--${diceType ?? DiceType.number}`">
     <template  v-if="diceType !== DiceType.color">
-      <div v-for="i in props.value" :key="i">o</div>
+      <div v-for="i in props.value" :key="i">
+        <font-awesome-icon class="icon-dot" icon="fa-solid fa-circle" />
+      </div>
     </template>
     <div v-else>
-      X
+      <font-awesome-icon class="icon-x" icon="fa-solid fa-xmark" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .dice {
-  width: 200px;
-  height: 200px;
   background-color: v-bind(cssBackgroundColor);
   color: v-bind(cssForeGroundColor);
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  margin: 5px;
+  float: left;
+  text-align: center;
+
+  &.dice-type--color {
+    .icon-x {
+      font-size: 70px;
+      margin-top: 5px;
+    }
+  }
 }
 </style>

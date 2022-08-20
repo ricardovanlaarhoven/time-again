@@ -21,8 +21,36 @@ function reRollAllDices() {
 </script>
 
 <template>
-  <main>
+  <main id="dice-grid">
     <BaseDice :value="dice.value" :color="dice.color" :dice-type="dice.type" v-for="dice in dices"/>
-    <button @click="reRollAllDices">Reroll</button>
+    <button @click="reRollAllDices"><font-awesome-icon  class="dice-icon" icon="fa-solid fa-dice" />&nbsp; Roll Dice</button>
   </main>
 </template>
+
+<style scoped lang="scss">
+#dice-grid {
+  background-color: #203839;
+  width: 200px;
+  height: 364px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  button {
+    background-color: #fff;
+    color: #203839;
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-left: 30px;
+    margin-top: 20px;
+
+    .dice-icon {
+      font-size: 16px;
+      color: #203839;
+    }
+  }
+}
+</style>
