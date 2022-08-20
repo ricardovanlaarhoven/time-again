@@ -462,7 +462,7 @@ function handleColumnClick(rowIndex: number, columnIndex: number) {
       <div>
         <div v-for="(column, columnIndex) in row" :key="columnIndex" :data-color="column.color" :data-index="columnIndex" class="column" @click="handleColumnClick(rowIndex, columnIndex)">
           <font-awesome-icon class="star" v-if="column.star" icon="fa-solid fa-star" />
-          <font-awesome-icon class="cross" icon="fa-solid fa-times" v-if="playerGrid?.[rowIndex]?.[columnIndex] === true" size="3x"/>
+          <font-awesome-icon class="cross" icon="fa-solid fa-xmark" v-if="playerGrid?.[rowIndex]?.[columnIndex] === true" size="3x"/>
         </div>
       </div>
     </div>
