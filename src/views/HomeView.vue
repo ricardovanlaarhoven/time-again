@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Colors } from '@/enums/Colors';
+import { Ref, ref } from 'vue';
 
 const gameGrid : {color: Colors, star: boolean}[][] = [
   [
@@ -437,14 +438,31 @@ const gameGrid : {color: Colors, star: boolean}[][] = [
     },
   ]
 ]
+
+const playerGrid: Ref<boolean[][]> = ref([]);
+for (let i = 0; i < 7; i++) {
+  playerGrid.value[i] = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+}
+function handleColumnClick(rowIndex: number, columnIndex: number) {
+  const isFirstColumn = (columnIndex === 7);
+  const hasCheckOnRight = columnIndex === 14 ? false : playerGrid.value[rowIndex][columnIndex + 1];
+  const hasCheckOnLeft = columnIndex === 0 ? false : playerGrid.value[rowIndex][columnIndex - 1];
+  const hasCheckOnTop = rowIndex === 0 ? false : playerGrid.value[rowIndex - 1][columnIndex];
+  const hasCheckOnBottom = rowIndex === 6 ? false : playerGrid.value[rowIndex + 1][columnIndex];
+  if (isFirstColumn || hasCheckOnRight || hasCheckOnLeft || hasCheckOnTop || hasCheckOnBottom) {
+    playerGrid.value[rowIndex][columnIndex] = !playerGrid.value[rowIndex][columnIndex];
+    return;
+  }
+}
 </script>
 
 <template>
   <main id="game-grid">
     <div v-for="(row, rowIndex) in gameGrid" :key="rowIndex" class="row">
       <div>
-        <div v-for="(column, columnIndex) in row" :key="columnIndex" :data-color="column.color" :data-index="columnIndex" class="column">
+        <div v-for="(column, columnIndex) in row" :key="columnIndex" :data-color="column.color" :data-index="columnIndex" class="column" @click="handleColumnClick(rowIndex, columnIndex)">
           <font-awesome-icon class="star" v-if="column.star" icon="fa-solid fa-star" />
+          <font-awesome-icon class="cross" icon="fa-solid fa-times" v-if="playerGrid?.[rowIndex]?.[columnIndex] === true" size="3x"/>
         </div>
       </div>
     </div>
@@ -514,6 +532,12 @@ const gameGrid : {color: Colors, star: boolean}[][] = [
       opacity: 0.5;
       font-size: 28px;
       margin-top: 10px
+    }
+    .cross {
+      position: absolute;
+      opacity: 0.5;
+      left: 8px;
+      top: 0;
     }
   }
 }
