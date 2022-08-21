@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import GameGrid from '@/components/GameGrid.vue';
+import DiceRoller from '@/components/DiceRoller.vue';
 </script>
 
 <template>
   <main>
-    Hi all :)
+    <GameGrid/>
+    <DiceRoller/>
   </main>
 </template>
+
