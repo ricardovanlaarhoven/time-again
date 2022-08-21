@@ -444,12 +444,13 @@ for (let i = 0; i < 7; i++) {
   playerGrid.value[i] = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
 }
 function handleColumnClick(rowIndex: number, columnIndex: number) {
+  const isRemovingCheck = playerGrid.value[rowIndex][columnIndex];
   const isFirstColumn = (columnIndex === 7);
   const hasCheckOnRight = columnIndex === 14 ? false : playerGrid.value[rowIndex][columnIndex + 1];
   const hasCheckOnLeft = columnIndex === 0 ? false : playerGrid.value[rowIndex][columnIndex - 1];
   const hasCheckOnTop = rowIndex === 0 ? false : playerGrid.value[rowIndex - 1][columnIndex];
   const hasCheckOnBottom = rowIndex === 6 ? false : playerGrid.value[rowIndex + 1][columnIndex];
-  if (isFirstColumn || hasCheckOnRight || hasCheckOnLeft || hasCheckOnTop || hasCheckOnBottom) {
+  if (isRemovingCheck || isFirstColumn || hasCheckOnRight || hasCheckOnLeft || hasCheckOnTop || hasCheckOnBottom) {
     playerGrid.value[rowIndex][columnIndex] = !playerGrid.value[rowIndex][columnIndex];
     return;
   }
