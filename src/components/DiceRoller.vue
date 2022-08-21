@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseDice from '@/components/BaseDice.vue';
+import BaseDice from '@/components/BaseDie.vue';
 import { Colors } from '@/enums/Colors';
 import { ref } from 'vue';
 import { DiceType } from '@/enums/DiceType';
@@ -22,7 +22,7 @@ function reRollAllDices() {
 
 <template>
   <main id="dice-grid">
-    <BaseDice :value="dice.value" :color="dice.color" :dice-type="dice.type" v-for="dice in dices"/>
+    <BaseDice :value="dice.value" :color="dice.color" :dice-type="dice.type" v-for="(dice, index) in dices" :key="index"/>
     <button @click="reRollAllDices"><font-awesome-icon  class="dice-icon" icon="fa-solid fa-dice" />&nbsp; Roll Dice</button>
   </main>
 </template>
