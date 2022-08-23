@@ -14,7 +14,8 @@ const cssColors = {
   [Colors.orange]: '#e1774c',
   [Colors.blue]: '#7FC6EB',
   [Colors.red]: '#e54365',
-  [Colors.yellow]: '#e7b556'
+  [Colors.yellow]: '#e7b556',
+  [Colors.black]: '#0a2021'
 }
 
 const cssBackgroundColor = computed((): string => {
@@ -22,7 +23,7 @@ const cssBackgroundColor = computed((): string => {
     return '#FFFFFF';
   }
 
-  return '#0a1515'
+  return '#0a2021'
 })
 
 const cssForeGroundColor = computed((): string => {
@@ -37,7 +38,7 @@ const cssForeGroundColor = computed((): string => {
 
 <template>
   <div class="dice" :class="`dice-value--${props.value} dice-type--${diceType ?? DiceType.number}`">
-    <template  v-if="diceType !== DiceType.color">
+    <template v-if="diceType !== DiceType.color">
       <div v-for="i in props.value" :key="i">
         <font-awesome-icon class="icon-dot" icon="fa-solid fa-circle" />
       </div>

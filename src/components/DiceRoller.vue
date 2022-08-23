@@ -15,7 +15,7 @@ const dices = ref([
 
 function reRollAllDices() {
   dices.value.forEach(dice => {
-    dice.value = Math.floor(Math.random()*5)+1
+    dice.value = Math.floor(Math.random()*6)+1
   })
 }
 </script>
