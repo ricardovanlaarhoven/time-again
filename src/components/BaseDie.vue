@@ -36,7 +36,7 @@ const cssForeGroundColor = computed((): string => {
 </script>
 
 <template>
-  <div class="dice" :class="`dice-value--${props.value}} dice-type--${diceType ?? DiceType.number}`">
+  <div class="dice" :class="`dice-value--${props.value} dice-type--${diceType ?? DiceType.number}`">
     <template  v-if="diceType !== DiceType.color">
       <div v-for="i in props.value" :key="i">
         <font-awesome-icon class="icon-dot" icon="fa-solid fa-circle" />
@@ -63,6 +63,80 @@ const cssForeGroundColor = computed((): string => {
     .icon-x {
       font-size: 70px;
       margin-top: 5px;
+    }
+  }
+
+  &.dice-type--number {
+    padding: 10px;
+    box-sizing: border-box;
+
+    &.dice-value--1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &.dice-value--2 {
+      display: flex;
+      justify-content : space-between;
+
+      div:nth-of-type(2) {
+        align-self: flex-end;
+      }
+    }
+    &.dice-value--3 {
+      display: flex;
+      justify-content : space-between;
+
+      div:nth-of-type(2) {
+        align-self: center;
+      }
+
+      div:nth-of-type(3) {
+        align-self: flex-end;
+      }
+    }
+    &.dice-value--4 {
+      display: flex;
+      justify-content : space-between;
+      position: relative;
+
+      div:nth-of-type(2) {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+      div:nth-of-type(3) {
+        position: absolute;
+        right: 10px;
+      }
+      div:nth-of-type(4) {
+        align-self: flex-end;
+      }
+    }
+    &.dice-value--5 {
+      display: flex;
+      justify-content : space-between;
+      position: relative;
+
+      div:nth-of-type(2) {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+      div:nth-of-type(3) {
+        position: absolute;
+        right: 10px;
+      }
+      div:nth-of-type(4) {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+      div:nth-of-type(5) {
+        position: absolute;
+        top: 32px;
+        left: 33px;
+      }
     }
   }
 }
