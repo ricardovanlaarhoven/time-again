@@ -38,11 +38,14 @@ const cssForeGroundColor = computed((): string => {
 
 <template>
   <div class="dice" :class="`dice-value--${props.value} dice-type--${diceType ?? DiceType.number}`">
-    <template v-if="diceType !== DiceType.color">
+    <template v-if="diceType !== DiceType.color && props.value < 6">
       <div v-for="i in props.value" :key="i">
         <font-awesome-icon class="icon-dot" icon="fa-solid fa-circle" />
       </div>
     </template>
+    <div v-else-if="diceType !== DiceType.color">
+      <font-awesome-icon class="icon-dot" icon="fa-solid fa-question" />
+    </div>
     <div v-else>
       <font-awesome-icon class="icon-x" icon="fa-solid fa-xmark" />
     </div>
@@ -138,6 +141,13 @@ const cssForeGroundColor = computed((): string => {
         top: 32px;
         left: 33px;
       }
+    }
+
+    &.dice-value--6 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
     }
   }
 }
