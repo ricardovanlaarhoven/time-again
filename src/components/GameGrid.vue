@@ -476,6 +476,7 @@ function handleColumnClick(rowIndex: number, columnIndex: number) {
   height: 364px;
   background-color: #203839;
   padding: 20px;
+  float: left;
 
   .row {
     width: 780px;
@@ -520,11 +521,11 @@ function handleColumnClick(rowIndex: number, columnIndex: number) {
     }
 
     &[data-index="7"] {
-      border: 1.5px solid #fff;
+      border: 2px solid #fff;
 
       &:before {
-        top: 2px;
-        left: 2px;
+        top: 1px;
+        left: 1px;
       }
     }
 

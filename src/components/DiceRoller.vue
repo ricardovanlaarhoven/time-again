@@ -36,9 +36,10 @@ function reRollAllDices() {
 #dice-grid {
   background-color: #203839;
   width: 200px;
-  height: 364px;
-  padding: 10px;
+  height: 404px;
+  padding: 40px 10px 10px;
   box-sizing: border-box;
+  float: right;
 
   button {
     background-color: #fff;
