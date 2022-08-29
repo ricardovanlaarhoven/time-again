@@ -1,29 +1,34 @@
 <script setup lang="ts">
 import BaseDice from '@/components/BaseDie.vue';
-import { Colors } from '@/enums/Colors';
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { DiceType } from '@/enums/DiceType';
+import { useRealtimeDatabase } from '@/useRealtimeDatabase';
 
-const dices = ref([
-  {color: Colors.green, value: 1, type: DiceType.number},
-  {color: Colors.green, value: 1, type: DiceType.number},
-  {color: Colors.green, value: 1, type: DiceType.number},
-  {color: Colors.green, value: 1, type: DiceType.color},
-  {color: Colors.green, value: 1, type: DiceType.color},
-  {color: Colors.green, value: 1, type: DiceType.color},
-])
+const diceTypes = [
+  { type: DiceType.number, count: 3, },
+  { type: DiceType.color, count: 3},
+]
+//dices: Ref<{values:{value: 1|2|3|4|5|6, type: DiceType}[]}>
+const {data} = useRealtimeDatabase("games/1/diceValues");
 
 function reRollAllDices() {
-  dices.value.forEach(dice => {
-    dice.value = Math.floor(Math.random()*5)+1
-  })
+  data.value.values = [];
+  diceTypes.forEach(type => {
+    for (let i = 0; i < type.count; i++) {
+      data.value.values.push({value: Math.floor(Math.random() * 6) + 1 as 1|2|3|4|5|6, type: type.type});
+    }
+  });
 }
+
+
 </script>
 
 <template>
   <main id="dice-grid">
-    <BaseDice :value="dice.value" :color="dice.color" :dice-type="dice.type" v-for="(dice, index) in dices" :key="index"/>
-    <button @click="reRollAllDices"><font-awesome-icon  class="dice-icon" icon="fa-solid fa-dice" />&nbsp; Roll Dice</button>
+    <template v-if="data.values.length === 6">
+      <BaseDice :value="dice.value" :color="dice.color" :dice-type="dice.type" v-for="(dice, index) in data.values" :key="index"/>
+    </template>
+      <button @click="reRollAllDices"><font-awesome-icon  class="dice-icon" icon="fa-solid fa-dice" />&nbsp; Roll Dice</button>
   </main>
 </template>
 

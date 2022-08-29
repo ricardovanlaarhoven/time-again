@@ -4,7 +4,6 @@ import { computed } from 'vue';
 import { DiceType } from '@/enums/DiceType';
 
 const props = defineProps<{
-  color: Colors,
   value: 1|2|3|4|5|6,
   diceType: DiceType
 }>()
@@ -37,7 +36,7 @@ const cssForeGroundColor = computed((): string => {
 
 <template>
   <div class="dice" :class="`dice-value--${props.value}} dice-type--${diceType ?? DiceType.number}`">
-    <template  v-if="diceType !== DiceType.color">
+    <template v-if="diceType !== DiceType.color">
       <div v-for="i in props.value" :key="i">
         <font-awesome-icon class="icon-dot" icon="fa-solid fa-circle" />
       </div>
