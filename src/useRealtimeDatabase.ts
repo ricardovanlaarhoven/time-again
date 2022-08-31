@@ -1,20 +1,22 @@
 import { realtimeDatabase } from '@/plugins/realtimeDatabase';
 import { ref as fBRef, onValue, update } from 'firebase/database';
-import { computed, ref, watch } from 'vue';
+import { type Ref, ref, watch } from 'vue';
 import isEqual from 'lodash/isEqual';
-import { DataSnapshot } from 'firebase/database';
+import type { DataSnapshot } from 'firebase/database';
 
-export function useRealtimeDatabase(path: string) {
+export function useRealtimeDatabase <Type extends Record<string, unknown>> (path: string, defaultValue: Type) {
   const pathReference = fBRef(realtimeDatabase, path);
   let firebaseData = {};
-  const data = ref({values:[]});
+  const data = ref(defaultValue) as Ref<Type>;
 
   onValue(pathReference, (snapshot: DataSnapshot) => {
+    if(!snapshot.val()) return;
+
     firebaseData = snapshot.val();
     data.value = snapshot.val();
   });
 
-  function updateData(data: any) {
+  function updateData(data: Type) {
     update(pathReference, data);
   }
 
